@@ -5,7 +5,7 @@ from datetime import date,datetime
 my_file=Dataset('/tmp/my_file.txt')
 
 with DAG('producer',start_date=datetime(2022, 1, 1),
-         schedule_interval='@daily',catchup=False) as dag:
+         schedule_interval='@daily',catchup=False , tags=['mydags']) as dag:
     
     @task
     def update_dataset():

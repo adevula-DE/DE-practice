@@ -27,7 +27,7 @@ def _store_user():
                      ,filename='/tmp/processed_user.csv')
 
 with DAG('user_processing',start_date=datetime(2022, 1, 1),end_date=datetime(2022, 1, 2),
-         schedule_interval='@daily',catchup=False) as dag:
+         schedule_interval='@daily',catchup=False,tags=['mydags']) as dag:
     
     create_table = PostgresOperator(
         task_id='create_table',
