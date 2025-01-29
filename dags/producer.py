@@ -9,7 +9,7 @@ with DAG('producer',start_date=datetime(2025, 1, 1),
     
     @task
     def update_dataset():
-        with open('/tmp/my_file.txt','a+') as f:
+        with open(my_file.uri,'a+') as f:
             f.write('producer update')
     
     update_dataset()
