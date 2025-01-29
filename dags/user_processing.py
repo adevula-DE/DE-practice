@@ -26,7 +26,7 @@ def _store_user():
     hook.copy_expert(sql="COPY users from stdin WITH DELIMITER as ',' "
                      ,filename='/tmp/processed_user.csv')
 
-with DAG('user_processing',start_date=datetime(2022, 1, 1),end_date=datetime(2022, 1, 2),
+with DAG('user_processing',start_date=datetime(2025, 1, 1),end_date=datetime(2025, 1, 2),
          schedule_interval='@daily',catchup=False,tags=['mydags']) as dag:
     
     create_table = PostgresOperator(
