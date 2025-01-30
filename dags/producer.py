@@ -6,7 +6,8 @@ my_file=Dataset('/tmp/my_file.txt')
 my_file2=Dataset('/tmp/my_file2.txt')
 
 with DAG('producer',start_date=datetime(2025, 1, 1),
-         schedule_interval='@daily',catchup=False , tags=['mydags']) as dag:
+         schedule_interval='@daily',catchup=False , 
+         tags=['mydags']) as dag:
     
     @task(outlets=[my_file])
     def update_dataset():
