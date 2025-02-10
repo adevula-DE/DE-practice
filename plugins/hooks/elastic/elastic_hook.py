@@ -8,7 +8,7 @@ class ElasticHook(BaseHook):
         conn = self.get_connection(conn_id)
 
         conn_config ={}
-        host= []
+        hosts= []
 
         if conn.host:
             hosts = conn.host.split(',')
