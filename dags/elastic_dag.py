@@ -9,7 +9,7 @@ def _print_es_info():
     print(hook.info())
  
 with DAG('elastic_dag', start_date=datetime(2022, 1, 1), 
-         schedule_interval='@daily', catchup=False) as dag:
+         schedule_interval='@daily', catchup=False) :
  
     print_es_info = PythonOperator(
         task_id='print_es_info',
