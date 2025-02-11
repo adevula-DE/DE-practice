@@ -1,3 +1,0 @@
-[submodule "airflow_proj"]
-	path = airflow_proj
-	url = https://github.com/adevula-DE/airflow_proj.git
