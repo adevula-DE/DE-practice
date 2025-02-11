@@ -1,0 +1,19 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore log files
+logs/
+*.log
+section_6_slides/__MACOSX/section_6_slides/._Section 6 - Adding a View to Apache Airflow UI.pdf
+section_6_slides/__MACOSX/section_6_slides/._Section 6 - Adding Functionalities to Apache Airflow.pdf
+section_6_slides/__MACOSX/section_6_slides/._Section 6 - Creating a Hook .pdf
+section_6_slides/__MACOSX/section_6_slides/._Section 6 - Creating an Operator .pdf
+section_6_slides/__MACOSX/section_6_slides/._Section 6 - Introduction.pdf
+section_6_slides/__MACOSX/section_6_slides/._Section 6 - Recap.pdf
+section_6_slides/section_6_slides/Section 6 - Adding a View to Apache Airflow UI.pdf
+section_6_slides/section_6_slides/Section 6 - Adding Functionalities to Apache Airflow.pdf
+section_6_slides/section_6_slides/Section 6 - Creating a Hook .pdf
+section_6_slides/section_6_slides/Section 6 - Creating an Operator .pdf
+section_6_slides/section_6_slides/Section 6 - Introduction.pdf
+section_6_slides/section_6_slides/Section 6 - Recap.pdf
