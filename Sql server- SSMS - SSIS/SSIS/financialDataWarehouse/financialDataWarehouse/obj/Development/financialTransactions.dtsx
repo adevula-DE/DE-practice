@@ -11,10 +11,81 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="financialTransactions"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{5FB9A6A3-C093-4839-95E4-CD5E2AEC91AF}">
+  DTS:VersionBuild="40"
+  DTS:VersionGUID="{EF8DD258-F848-4084-B763-EA3D5CFC1FA1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{351CA82A-C893-4570-94D4-6E1D492BA435}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\ANUDEEP LEGION\OneDrive\Documents\DE-practice\Sql server- SSMS - SSIS\SSMS\table data\exchange_rates.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[supplier csv]"
+      DTS:CreationName="FLATFILE"
+      DTS:Description="csv files"
+      DTS:DTSID="{2A174AD8-36DE-490C-BC30-87C82E7A3732}"
+      DTS:ObjectName="supplier csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\ANUDEEP LEGION\OneDrive\Documents\DE-practice\Sql server- SSMS - SSIS\SSMS\table data\suppliers.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="supplier_id"
+              DTS:DTSID="{CDDC046A-2F90-4E71-8619-296E73789E2A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="supplier_name"
+              DTS:DTSID="{AF5C62A1-12B8-4424-AE85-1604ED917020}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="contact_name"
+              DTS:DTSID="{9067EB9F-1C05-4400-A248-65EDF63D94EE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="phone"
+              DTS:DTSID="{235073F0-6158-4BB5-8D36-373875E74E1F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -547,6 +618,979 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\import exchange_rates"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FC5E895B-0775-4057-8B51-1AC118A4ED64}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="import exchange_rates"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\import exchange_rates\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\import exchange_rates\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import exchange_rates\Data Conversion.Inputs[Data Conversion Input].Columns[from_currency]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="from_currency"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[from_currency]" />
+                    <inputColumn
+                      refId="Package\import exchange_rates\Data Conversion.Inputs[Data Conversion Input].Columns[to_currency]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="to_currency"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[to_currency]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\import exchange_rates\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output].Columns[from_currency_varchar]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output].Columns[from_currency_varchar]"
+                      name="from_currency_varchar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[from_currency]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output].Columns[to_currency_varchar]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="4"
+                      lineageId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output].Columns[to_currency_varchar]"
+                      name="to_currency_varchar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[to_currency]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\import exchange_rates\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import exchange_rates\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">rates$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\import exchange_rates\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[from_currency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[from_currency]"
+                      length="255"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[from_currency]"
+                      name="from_currency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[to_currency]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[to_currency]"
+                      length="255"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[to_currency]"
+                      name="to_currency"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[exchange_rate]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[exchange_rate]"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[exchange_rate]"
+                      name="exchange_rate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[effective_date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[effective_date]"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[effective_date]"
+                      name="effective_date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[from_currency]"
+                      dataType="wstr"
+                      length="255"
+                      name="from_currency" />
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[to_currency]"
+                      dataType="wstr"
+                      length="255"
+                      name="to_currency" />
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[exchange_rate]"
+                      dataType="r8"
+                      name="exchange_rate" />
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[effective_date]"
+                      dataType="date"
+                      name="effective_date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[from_currency]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[from_currency]"
+                      name="from_currency" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[to_currency]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[to_currency]"
+                      name="to_currency" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[exchange_rate]"
+                      dataType="r8"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[exchange_rate]"
+                      name="exchange_rate" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[effective_date]"
+                      dataType="date"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[effective_date]"
+                      name="effective_date" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination - warehouse exchange rates"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[exchange_rates]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Connections[OleDbConnection]"
+                  connectionManagerID="{3380789D-5BE6-4E3B-B325-7B0BA0A22404}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[financial_data_warehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].Columns[exchange_rate]"
+                      cachedDataType="r8"
+                      cachedName="exchange_rate"
+                      externalMetadataColumnId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[exchange_rate]"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[exchange_rate]" />
+                    <inputColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].Columns[effective_date]"
+                      cachedDataType="date"
+                      cachedName="effective_date"
+                      externalMetadataColumnId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[effective_date]"
+                      lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[effective_date]" />
+                    <inputColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].Columns[from_currency_varchar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="from_currency_varchar"
+                      externalMetadataColumnId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[from_currency]"
+                      lineageId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output].Columns[from_currency_varchar]" />
+                    <inputColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].Columns[to_currency_varchar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="to_currency_varchar"
+                      externalMetadataColumnId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[to_currency]"
+                      lineageId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output].Columns[to_currency_varchar]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[from_currency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="from_currency" />
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[to_currency]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="to_currency" />
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[exchange_rate]"
+                      dataType="numeric"
+                      name="exchange_rate"
+                      precision="10"
+                      scale="4" />
+                    <externalMetadataColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[effective_date]"
+                      dataType="dbDate"
+                      name="effective_date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\import exchange_rates.Paths[Data Conversion Output]"
+              endId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\import exchange_rates\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\import exchange_rates.Paths[Excel Source Output]"
+              endId="Package\import exchange_rates\Data Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\import suppliers"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{443A369C-7101-4EE2-925B-F5274923F4E0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="import suppliers"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\import suppliers\Data Conversion 1"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion 1"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input].Columns[supplier_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="supplier_id"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_id]" />
+                    <inputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input].Columns[phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="phone"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[phone]" />
+                    <inputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input].Columns[supplier_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="supplier_name"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_name]" />
+                    <inputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input].Columns[contact_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="contact_name"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[contact_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of supplier_id]"
+                      dataType="ui2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of supplier_id]"
+                      name="Copy of supplier_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_id]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of phone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="14"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of phone]"
+                      name="Copy of phone"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[phone]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of supplier_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of supplier_name]"
+                      name="Copy of supplier_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of contact_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of contact_name]"
+                      name="Copy of contact_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[contact_name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import suppliers\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\import suppliers\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[supplier csv]"
+                  connectionManagerRefId="Package.ConnectionManagers[supplier csv]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[supplier_id]"
+                      length="50"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_id]"
+                      name="supplier_id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[supplier_name]"
+                      length="50"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[supplier_name]"
+                      name="supplier_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[contact_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[contact_name]"
+                      length="50"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[contact_name]"
+                      name="contact_name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[phone]"
+                      length="50"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].Columns[phone]"
+                      name="phone"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[supplier_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="supplier_id" />
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[supplier_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="supplier_name" />
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[contact_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="contact_name" />
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="phone" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\import suppliers\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[suppliers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\import suppliers\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{3380789D-5BE6-4E3B-B325-7B0BA0A22404}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[financial_data_warehouse]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of supplier_id]"
+                      cachedDataType="ui2"
+                      cachedName="Copy of supplier_id"
+                      externalMetadataColumnId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[supplier_id]"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of supplier_id]" />
+                    <inputColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of phone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="Copy of phone"
+                      externalMetadataColumnId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[phone]"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of phone]" />
+                    <inputColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of supplier_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Copy of supplier_name"
+                      externalMetadataColumnId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[supplier_name]"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of supplier_name]" />
+                    <inputColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of contact_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Copy of contact_name"
+                      externalMetadataColumnId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_name]"
+                      lineageId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output].Columns[Copy of contact_name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[supplier_id]"
+                      dataType="i4"
+                      name="supplier_id" />
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[supplier_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="supplier_name" />
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="contact_name" />
+                    <externalMetadataColumn
+                      refId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[phone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="phone" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\import suppliers\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\import suppliers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\import suppliers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\import suppliers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\import suppliers\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\import suppliers.Paths[Data Conversion Output]"
+              endId="Package\import suppliers\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\import suppliers\Data Conversion 1.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\import suppliers.Paths[Flat File Source Output]"
+              endId="Package\import suppliers\Data Conversion 1.Inputs[Data Conversion Input]"
+              name="Flat File Source Output"
+              startId="Package\import suppliers\Flat File Source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\truncate warehouse financial trnsactions"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -585,11 +1629,19 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="182,42"
           Id="Package\customerTransaction"
           TopLeft="152,281" />
+        <NodeLayout
+          Size="191,42"
+          Id="Package\import exchange_rates"
+          TopLeft="442,267" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\import suppliers"
+          TopLeft="684,261" />
         <NodeLayout
           Size="275,42"
           Id="Package\truncate warehouse financial trnsactions"
@@ -639,37 +1691,37 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
         <NodeLayout
           Size="203,42"
           Id="Package\customerTransaction\src financial_transactions"
-          TopLeft="91,128" />
+          TopLeft="136,43" />
         <NodeLayout
           Size="287,42"
           Id="Package\customerTransaction\dest datawarehouse financial_transactions"
-          TopLeft="388,162" />
+          TopLeft="133,164" />
         <EdgeLayout
           Id="Package\customerTransaction.Paths[OLE DB Source Output]"
-          TopLeft="294,149">
+          TopLeft="237.5,85">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="94,34"
+              EndConnector="39,79"
               Start="0,0"
-              End="86.5,34">
+              End="39,71.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="43,0" />
+                    End="0,35.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="43,0"
-                    Point2="47,0"
-                    Point3="47,4" />
+                    Point1="0,35.5"
+                    Point2="0,39.5"
+                    Point3="4,39.5" />
                   <mssgle:LineSegment
-                    End="47,30" />
+                    End="35,39.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="47,30"
-                    Point2="47,34"
-                    Point3="51,34" />
+                    Point1="35,39.5"
+                    Point2="39,39.5"
+                    Point3="39,43.5" />
                   <mssgle:LineSegment
-                    End="86.5,34" />
+                    End="39,71.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -696,6 +1748,209 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\customerTransaction\src financial_transactions">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\import exchange_rates">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="144,42"
+          Id="Package\import exchange_rates\Excel Source"
+          TopLeft="372.5,115.5" />
+        <NodeLayout
+          Size="319,42"
+          Id="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates"
+          TopLeft="357,378" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\import exchange_rates\Data Conversion"
+          TopLeft="352,224" />
+        <EdgeLayout
+          Id="Package\import exchange_rates.Paths[Excel Source Output]"
+          TopLeft="444.5,157.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-12,66.5"
+              Start="0,0"
+              End="-12,59">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.25"
+                    Point2="0,33.25"
+                    Point3="-4,33.25" />
+                  <mssgle:LineSegment
+                    End="-8,33.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-8,33.25"
+                    Point2="-12,33.25"
+                    Point3="-12,37.25" />
+                  <mssgle:LineSegment
+                    End="-12,59" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\import exchange_rates.Paths[Data Conversion Output]"
+          TopLeft="432.5,266">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="84,112"
+              Start="0,0"
+              End="84,104.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52"
+                    Point2="0,56"
+                    Point3="4,56" />
+                  <mssgle:LineSegment
+                    End="80,56" />
+                  <mssgle:CubicBezierSegment
+                    Point1="80,56"
+                    Point2="84,56"
+                    Point3="84,60" />
+                  <mssgle:LineSegment
+                    End="84,104.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\import suppliers">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\import suppliers\Flat File Source"
+          TopLeft="476,177" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\import suppliers\Data Conversion 1"
+          TopLeft="528,316" />
+        <EdgeLayout
+          Id="Package\import suppliers.Paths[Flat File Source Output]"
+          TopLeft="554,219">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="59,97"
+              Start="0,0"
+              End="59,89.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.5"
+                    Point2="0,48.5"
+                    Point3="4,48.5" />
+                  <mssgle:LineSegment
+                    End="55,48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55,48.5"
+                    Point2="59,48.5"
+                    Point3="59,52.5" />
+                  <mssgle:LineSegment
+                    End="59,89.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="177,42"
+          Id="Package\import suppliers\OLE DB Destination"
+          TopLeft="527,461" />
+        <EdgeLayout
+          Id="Package\import suppliers.Paths[Data Conversion Output]"
+          TopLeft="614.25,358">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,103"
+              Start="0,0"
+              End="0,95.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,95.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\import exchange_rates\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\import suppliers\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
