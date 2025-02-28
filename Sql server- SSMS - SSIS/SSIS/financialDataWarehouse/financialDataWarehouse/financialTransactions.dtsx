@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="financialTransactions"
   DTS:PackageType="5"
-  DTS:VersionBuild="73"
-  DTS:VersionGUID="{646D8971-21A2-497B-8AE8-B0C1BBB98F0B}">
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{FC914119-89B0-466E-9F80-ECC28FCBC560}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -21,6 +21,8 @@
       DTS:CreationName="EXCEL"
       DTS:DTSID="{351CA82A-C893-4570-94D4-6E1D492BA435}"
       DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[$Project::ExcelConnectionManager_ServerName]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
@@ -34,6 +36,8 @@
       DTS:Description="new suppliers transactions"
       DTS:DTSID="{7DB14856-4870-48E1-81FC-95022DDB9C30}"
       DTS:ObjectName="new suppliers transactions">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::NewSuppliersTransactions_ConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"
@@ -172,6 +176,8 @@
       DTS:Description="csv files"
       DTS:DTSID="{2A174AD8-36DE-490C-BC30-87C82E7A3732}"
       DTS:ObjectName="supplier csv">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::SupplierCsv_ConnectionString]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:Format="Delimited"

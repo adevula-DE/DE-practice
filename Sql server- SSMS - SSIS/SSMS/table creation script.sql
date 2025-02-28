@@ -34,7 +34,8 @@ BEGIN
     SET @counter = @counter + 1;
 END;
 --select * from financial_transactions;
-
+--insert into financial_transactions values (10000,1101,'GMC corp', '2024-05-25',80055.25, 'INR')
+--insert into customer_details values (1101,'Customer 1101','customer1101@example.com','123-456-1101')
 --create insert values into financial_transactions_db.customer_details
 
 CREATE TABLE customer_details (
@@ -57,6 +58,8 @@ BEGIN
 END;
 
 --select * from dbo.customer_details;
+
+--to join financial_transactions and customers for warehouse creation
 select f.*,c.customer_name,c.email,c.phone 
 from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c.customer_id ;
 
@@ -94,10 +97,18 @@ add [customer_name] [varchar](50) NULL,
 alter table dbo.financial_transactions
 drop column [customer_name] ,[email],[phone]
 
+alter table dbo.financial_transactions
+add [amount_usd] float
+
+
+alter table dbo.financial_transactions
+add [supplier_contact_name] [varchar](30) NULL,
+	[supplier_phone] [varchar](14) NULL
+
 truncate table dbo.financial_transactions
 */
 
-select * from financial_transactions;
+
 
 --create financial_data_warehouse.suppliers
 CREATE TABLE suppliers (
@@ -106,6 +117,10 @@ CREATE TABLE suppliers (
     contact_name VARCHAR(30),
     phone VARCHAR(14)
 	);
+
+select * from financial_transactions;
+select * from exchange_rates
+select * from suppliers
 
 
 

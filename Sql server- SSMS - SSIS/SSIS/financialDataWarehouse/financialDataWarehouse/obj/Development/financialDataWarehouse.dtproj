@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">ANUDEEPLEGION</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAkiXSGbGibkO9z6i1aPkbPAAAAAACAAAAAAAQZgAAAAEAACAAAAC46pWWsil1L+9QJ2LWFXn9VHhKTUsI+nEDf/EWnJjKQAAAAAAOgAAAAAIAACAAAAA6rUjfeVpuG35ZZJMK/uZjShSZ2RZA+1Nssf7Rmde8AJAAAADtwNLQGtjNIZDDXeuiBQ+RtBDVFjF54ywk9OmLeTwkMPKx4fNKoSmTAuZO/OAgliopU1WTDz6G1ZdI00UMmzw8n5U7GGT6Re5sfDMtJRKudTa8/TYokYOvppYOzXcXZyd+WPpRosSP3k8lLSwOdu8V/XCS54W8qC1TjfGIoLiHQNketIM8bN1YR3zfJ4PHuJlAAAAA1cEibUdCG/JlCYJG+LywsCP8KyChNp/37asJvHtetlnjhLzls3Ur0FWy9GWUzwYQUh7uZR+C/KFRafrO+fug8g==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAkiXSGbGibkO9z6i1aPkbPAAAAAACAAAAAAAQZgAAAAEAACAAAACgEz/G0soP1el3YWGS19GVWvACzcdYPgao/e+VxcmSCgAAAAAOgAAAAAIAACAAAAByiYwMhzumh8bWCgaoqZ9wQ3dTUnZGxDUA+2wcRgQ9uJAAAADmF2b3wDCmewyYuS8tlTnVh95WYdwd0QhYwUC1HoLpsTJhU5wiJev1hvwXKXOEJnKKhLphdZkSjqgimbGpUK55KXBUmAu7A8uaeQDjXiYCWgNeskDC3WWwKHPfI4Bdl3mXFHwFcM7jMvP/9qUZJpzXswCiHc1kGBjt7od6TWLUbKEkiJVlMQjkluM9ENkNq4lAAAAAaZ0LEGIWjxojZNKBPsnZWxPqGJIshEHzIVrLHMormp6A69Gr83POT7q2IETSz0MX8HLrkJepk6rKVNvs4qWjag==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -155,21 +155,6 @@
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
-              </SSIS:Properties>
-            </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.financial_transactions_db.ServerName">
-              <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="CreationName">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="Description">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">localhost</SSIS:Property>
-                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
             <SSIS:Parameter SSIS:Name="CM.financial_transactions_db.UserName">
@@ -305,21 +290,6 @@
                 <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
-            <SSIS:Parameter SSIS:Name="CM.financial_data_warehouse.ServerName">
-              <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="CreationName">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="Description">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">localhost</SSIS:Property>
-                <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-              </SSIS:Properties>
-            </SSIS:Parameter>
             <SSIS:Parameter SSIS:Name="CM.financial_data_warehouse.UserName">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">
@@ -342,10 +312,10 @@
                 <SSIS:Property SSIS:Name="Name">financialTransactions</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">73</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">74</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{646D8971-21A2-497B-8AE8-B0C1BBB98F0B}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{FC914119-89B0-466E-9F80-ECC28FCBC560}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -455,21 +425,6 @@
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.Excel Connection Manager.ServerName">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Users\ANUDEEP LEGION\OneDrive\Documents\DE-practice\Sql server- SSMS - SSIS\SSMS\table data\exchange_rates.xlsx</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="CM.Excel Connection Manager.UserName">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">
@@ -542,21 +497,6 @@
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.new suppliers transactions.ConnectionString">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Users\ANUDEEP LEGION\OneDrive\Documents\DE-practice\Sql server- SSMS - SSIS\SSIS\output files(soln)\new supplier_transactions data.csv</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="CM.new suppliers transactions.DataRowsToSkip">
@@ -739,21 +679,6 @@
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Value">false</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">3</SSIS:Property>
-                  </SSIS:Properties>
-                </SSIS:Parameter>
-                <SSIS:Parameter SSIS:Name="CM.supplier csv.ConnectionString">
-                  <SSIS:Properties>
-                    <SSIS:Property SSIS:Name="ID">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="CreationName">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="Description">
-                    </SSIS:Property>
-                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">C:\Users\ANUDEEP LEGION\OneDrive\Documents\DE-practice\Sql server- SSMS - SSIS\SSMS\table data\suppliers.csv</SSIS:Property>
-                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="CM.supplier csv.DataRowsToSkip">
