@@ -1,4 +1,4 @@
 transaction_id,customer_id,supplier_name,transaction_date,amount,currency,customer_name,email,phone,exchange_rate,amount_usd,supplier_contact_name,supplier_phone
 14,115,XZX Ltd,2024-01-15,5301.38,GBP,Customer 115,customer115@example.com,123-456-0115,1.3000,6891.794000,,
 57,158,ABCY2 Corp,2024-02-27,1270.32,EUR,Customer 158,customer158@example.com,123-456-0158,.8900,1130.584800,,
-10000,1101,GMC corp,2024-05-25,80055.25,INR,Customer 1101,customer1101@example.com,123-456-1101,.0000,.000000,,
+10000,1101,GMC corp,2024-05-25,80055.25,INR,Customer 1101,customer1101@example.com,123-456-1101,87.4726,7002640.861150,,
