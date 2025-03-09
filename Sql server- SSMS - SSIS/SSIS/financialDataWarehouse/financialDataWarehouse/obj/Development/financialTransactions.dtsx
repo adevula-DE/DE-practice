@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="financialTransactions"
   DTS:PackageType="5"
-  DTS:VersionBuild="113"
-  DTS:VersionGUID="{917DD62A-3180-46E6-9649-32AB548C40AC}">
+  DTS:VersionBuild="158"
+  DTS:VersionGUID="{68557BA7-EDC5-443E-9B6C-68B619545979}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -2174,50 +2174,60 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
           version="1">
           <components>
             <component
-              refId="Package\Data Flow Task\Data Conversion 1"
+              refId="Package\Data Flow Task\Data Conversion"
               componentClassID="Microsoft.DataConvert"
               contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Data Conversion"
-              name="Data Conversion 1"
+              name="Data Conversion"
               usesDispositions="true">
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]"
+                  refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
                   name="Data Conversion Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input].Columns[from]"
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[from]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="from"
                       lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[from]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input].Columns[to]"
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[to]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="to"
                       lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[to]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[exrt]"
+                      cachedDataType="r8"
+                      cachedName="exrt"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[exrt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input].Columns[effdt]"
+                      cachedDataType="date"
+                      cachedName="effdt"
+                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[effdt]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output]"
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]"
                   exclusionGroup="1"
                   name="Data Conversion Output"
-                  synchronousInputId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output].Columns[uni from]"
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[from]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="50"
-                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output].Columns[uni from]"
-                      name="uni from"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[from]"
+                      name="from"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -2232,13 +2242,13 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
                       </properties>
                     </outputColumn>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output].Columns[uni to]"
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[to]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       length="50"
-                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output].Columns[uni to]"
-                      name="uni to"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[to]"
+                      name="to"
                       truncationRowDisposition="FailComponent">
                       <properties>
                         <property
@@ -2252,26 +2262,66 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
                           name="FastParse">false</property>
                       </properties>
                     </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[exchange_rate]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[exchange_rate]"
+                      name="exchange_rate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[exrt]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[effective_date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[effective_date]"
+                      name="effective_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[effdt]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
                   </outputColumns>
                   <externalMetadataColumns />
                 </output>
                 <output
-                  refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output]"
+                  refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Data Conversion Error Output"
-                  synchronousInputId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]">
+                  synchronousInputId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -2293,10 +2343,10 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
                   name="Derived Column Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[exrt]"
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[exchange_rate]"
                       cachedDataType="r8"
-                      cachedName="exrt"
-                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[exrt]" />
+                      cachedName="exchange_rate"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[exchange_rate]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -2322,13 +2372,13 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Expression"
-                          name="Expression">1 / #{Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[exrt]}</property>
+                          name="Expression">1 / #{Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[exchange_rate]}</property>
                         <property
                           containsID="true"
                           dataType="System.String"
                           description="Derived Column Friendly Expression"
                           expressionType="Notify"
-                          name="FriendlyExpression">1 / exrt</property>
+                          name="FriendlyExpression">1 / exchange_rate</property>
                       </properties>
                     </outputColumn>
                   </outputColumns>
@@ -2360,11 +2410,11 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
               </outputs>
             </component>
             <component
-              refId="Package\Data Flow Task\Excel Destination 1"
+              refId="Package\Data Flow Task\Excel Destination"
               componentClassID="Microsoft.ExcelDestination"
               contactInfo="Excel Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
               description="Excel Destination"
-              name="Excel Destination 1"
+              name="Excel Destination"
               usesDispositions="true">
               <properties>
                 <property
@@ -2408,7 +2458,7 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
               </properties>
               <connections>
                 <connection
-                  refId="Package\Data Flow Task\Excel Destination 1.Connections[OleDbConnection]"
+                  refId="Package\Data Flow Task\Excel Destination.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
                   connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
                   description="The OLE DB runtime connection used to access the database."
@@ -2416,57 +2466,57 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input]"
+                  refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="Excel Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].Columns[uni from]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="uni from"
-                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[from_currency]"
-                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output].Columns[uni from]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].Columns[uni to]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="uni to"
-                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[to_currency]"
-                      lineageId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output].Columns[uni to]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].Columns[effdt]"
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[effective_date]"
                       cachedDataType="date"
-                      cachedName="effdt"
-                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[effective_date]"
-                      lineageId="Package\Data Flow Task\Script Component.Outputs[Output 0].Columns[effdt]" />
+                      cachedName="effective_date"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[effective_date]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[effective_date]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].Columns[exchange_rate]"
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[from]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="from"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[from_currency]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[from]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[to]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="to"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[to_currency]"
+                      lineageId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output].Columns[to]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].Columns[exchange_rate]"
                       cachedDataType="r8"
                       cachedName="exchange_rate"
-                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[exchange_rate]"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[exchange_rate]"
                       lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[exchange_rate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[from_currency]"
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[from_currency]"
                       dataType="wstr"
                       length="255"
                       name="from_currency" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[to_currency]"
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[to_currency]"
                       dataType="wstr"
                       length="255"
                       name="to_currency" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[exchange_rate]"
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[exchange_rate]"
                       dataType="r8"
                       name="exchange_rate" />
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input].ExternalColumns[effective_date]"
+                      refId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input].ExternalColumns[effective_date]"
                       dataType="date"
                       name="effective_date" />
                   </externalMetadataColumns>
@@ -2474,22 +2524,22 @@ from dbo.financial_transactions f join dbo.customer_details c on f.customer_id=c
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Excel Destination 1.Outputs[Excel Destination Error Output]"
+                  refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="Excel Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input]">
+                  synchronousInputId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Excel Destination 1.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Excel Destination 1.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Excel Destination 1.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Excel Destination.Outputs[Excel Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -3638,36 +3688,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
               refId="Package\Data Flow Task.Paths[Data Conversion Output]"
               endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
               name="Data Conversion Output"
-              startId="Package\Data Flow Task\Data Conversion 1.Outputs[Data Conversion Output]" />
+              startId="Package\Data Flow Task\Data Conversion.Outputs[Data Conversion Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Derived Column Output]"
-              endId="Package\Data Flow Task\Excel Destination 1.Inputs[Excel Destination Input]"
+              endId="Package\Data Flow Task\Excel Destination.Inputs[Excel Destination Input]"
               name="Derived Column Output"
               startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
             <path
               refId="Package\Data Flow Task.Paths[Output 0]"
-              endId="Package\Data Flow Task\Data Conversion 1.Inputs[Data Conversion Input]"
+              endId="Package\Data Flow Task\Data Conversion.Inputs[Data Conversion Input]"
               name="Output 0"
               startId="Package\Data Flow Task\Script Component.Outputs[Output 0]" />
           </paths>
         </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Execute SQL Task"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{6508C3F2-48BC-49BB-8F0D-5600E9081853}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{351CA82A-C893-4570-94D4-6E1D492BA435}"
-          SQLTask:SqlStatementSource="drop table' exrates'&#xA;go&#xA;CREATE TABLE `exrates` (&#xA;    `effdt` DATETIME,&#xA;    `uni from` NVARCHAR(50),&#xA;    `uni to` NVARCHAR(50),&#xA;    `exchange_rate` DOUBLE PRECISION&#xA;)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -3865,19 +3898,21 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[exchange_rate]"
-                      dataType="r8"
+                      dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[exchange_rate]"
+                      length="255"
                       lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[exchange_rate]"
                       name="exchange_rate"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[effective_date]"
-                      dataType="date"
+                      dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
                       externalMetadataColumnId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].ExternalColumns[effective_date]"
+                      length="255"
                       lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[effective_date]"
                       name="effective_date"
                       truncationRowDisposition="FailComponent" />
@@ -4022,13 +4057,15 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
                   <inputColumns>
                     <inputColumn
                       refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].Columns[exchange_rate]"
-                      cachedDataType="r8"
+                      cachedDataType="wstr"
+                      cachedLength="255"
                       cachedName="exchange_rate"
                       externalMetadataColumnId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[exchange_rate]"
                       lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[exchange_rate]" />
                     <inputColumn
                       refId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].Columns[effective_date]"
-                      cachedDataType="date"
+                      cachedDataType="wstr"
+                      cachedLength="255"
                       cachedName="effective_date"
                       externalMetadataColumnId="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates.Inputs[OLE DB Destination Input].ExternalColumns[effective_date]"
                       lineageId="Package\import exchange_rates\Excel Source.Outputs[Excel Source Output].Columns[effective_date]" />
@@ -4652,7 +4689,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       DTS:LocaleID="-1"
       DTS:ObjectName="truncate warehouse exchange rates"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4686,7 +4723,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       DTS:LocaleID="-1"
       DTS:ObjectName="truncate warehouse suppliers"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -4707,11 +4744,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{74DC52A2-0E23-411B-8792-C45EB1921ABC}"
+      DTS:DTSID="{3F68EB50-7D5C-4901-843D-8A3BE5D98D80}"
       DTS:From="Package\truncate warehouse exchange rates"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Execute SQL Task" />
+      DTS:To="Package\Data Flow Task" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -4744,14 +4781,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
       DTS:To="Package\import exchange_rates" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
-      DTS:CreationName=""
-      DTS:DTSID="{143A1173-786A-4EC2-B0EA-8B4908551440}"
-      DTS:From="Package\Execute SQL Task"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 6"
-      DTS:To="Package\Data Flow Task" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -4768,19 +4797,19 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         <NodeLayout
           Size="182,42"
           Id="Package\customerTransaction"
-          TopLeft="307,480" />
+          TopLeft="307,513" />
         <NodeLayout
           Size="155,42"
           Id="Package\Data Flow Task"
-          TopLeft="161,170" />
+          TopLeft="161,131" />
         <NodeLayout
           Size="191,42"
           Id="Package\import exchange_rates"
-          TopLeft="144,241" />
+          TopLeft="139,267" />
         <NodeLayout
           Size="157,42"
           Id="Package\import suppliers"
-          TopLeft="471,200" />
+          TopLeft="470,267" />
         <NodeLayout
           Size="275,42"
           Id="Package\truncate warehouse exchange rates"
@@ -4788,25 +4817,25 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         <NodeLayout
           Size="275,42"
           Id="Package\truncate warehouse financial trnsactions"
-          TopLeft="264,343" />
+          TopLeft="262,409" />
         <NodeLayout
           Size="275,42"
           Id="Package\truncate warehouse suppliers"
-          TopLeft="417,66" />
+          TopLeft="416,116" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="399.75,385">
+          TopLeft="398.75,451">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,95"
+              EndConnector="0,62"
               Start="0,0"
-              End="0,87.5">
+              End="0,54.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,87.5" />
+                    End="0,54.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4817,18 +4846,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="552,108">
+          TopLeft="551,158">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,92"
+              EndConnector="0,109"
               Start="0,0"
-              End="0,84.5">
+              End="0,101.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,84.5" />
+                    End="0,101.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4839,30 +4868,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="549.5,242">
+          TopLeft="548.5,309">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-103.5,101"
+              EndConnector="-104.5,100"
               Start="0,0"
-              End="-103.5,93.5">
+              End="-104.5,92.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,56.2494577006508" />
+                    End="0,55.6529284164859" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,56.2494577006508"
-                    Point2="0,60.2494577006508"
-                    Point3="-4,60.2494577006508" />
+                    Point1="0,55.6529284164859"
+                    Point2="0,59.6529284164859"
+                    Point3="-4,59.6529284164859" />
                   <mssgle:LineSegment
-                    End="-99.5,60.2494577006508" />
+                    End="-100.5,59.6529284164859" />
                   <mssgle:CubicBezierSegment
-                    Point1="-99.5,60.2494577006508"
-                    Point2="-103.5,60.2494577006508"
-                    Point3="-103.5,64.2494577006508" />
+                    Point1="-100.5,59.6529284164859"
+                    Point2="-104.5,59.6529284164859"
+                    Point3="-104.5,63.6529284164859" />
                   <mssgle:LineSegment
-                    End="-103.5,93.5" />
+                    End="-104.5,92.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4873,30 +4902,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="239.5,283">
+          TopLeft="234.5,309">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="117.5,60"
+              EndConnector="120.5,100"
               Start="0,0"
-              End="117.5,52.5">
+              End="120.5,92.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.7917570498915" />
+                    End="0,55.6529284164859" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.7917570498915"
-                    Point2="0,35.7917570498915"
-                    Point3="4,35.7917570498915" />
+                    Point1="0,55.6529284164859"
+                    Point2="0,59.6529284164859"
+                    Point3="4,59.6529284164859" />
                   <mssgle:LineSegment
-                    End="113.5,35.7917570498915" />
+                    End="116.5,59.6529284164859" />
                   <mssgle:CubicBezierSegment
-                    Point1="113.5,35.7917570498915"
-                    Point2="117.5,35.7917570498915"
-                    Point3="117.5,39.7917570498915" />
+                    Point1="116.5,59.6529284164859"
+                    Point2="120.5,59.6529284164859"
+                    Point3="120.5,63.6529284164859" />
                   <mssgle:LineSegment
-                    End="117.5,52.5" />
+                    End="120.5,92.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4907,18 +4936,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="239,212">
+          TopLeft="236.5,173">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29"
+              EndConnector="0,94"
               Start="0,0"
-              End="0,21.5">
+              End="0,86.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.5" />
+                    End="0,86.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4927,46 +4956,20 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="170,43"
-          Id="Package\Execute SQL Task"
-          TopLeft="154,101" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="238.25,77">
+          TopLeft="238,77">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,24"
+              EndConnector="0,54"
               Start="0,0"
-              End="0,16.5">
+              End="0,46.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="238.75,144">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,26"
-              Start="0,0"
-              End="0,18.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.5" />
+                    End="0,46.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5380,81 +5383,47 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="167,42"
-          Id="Package\Data Flow Task\Script Component"
-          TopLeft="387,42" />
-        <NodeLayout
-          Size="170,42"
-          Id="Package\Data Flow Task\Data Conversion 1"
-          TopLeft="338,175" />
-        <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Output 0]"
-          TopLeft="470.5,84">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-47.5,91"
-              Start="0,0"
-              End="-47.5,83.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,41.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,41.5"
-                    Point2="0,45.5"
-                    Point3="-4,45.5" />
-                  <mssgle:LineSegment
-                    End="-43.5,45.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-43.5,45.5"
-                    Point2="-47.5,45.5"
-                    Point3="-47.5,49.5" />
-                  <mssgle:LineSegment
-                    End="-47.5,83.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="173,42"
-          Id="Package\Data Flow Task\Excel Destination 1"
-          TopLeft="327,385" />
+          Size="164,42"
+          Id="Package\Data Flow Task\Excel Destination"
+          TopLeft="355.5,383.5" />
         <NodeLayout
           Size="158,42"
           Id="Package\Data Flow Task\Derived Column"
           TopLeft="355,274" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Data Flow Task\Data Conversion"
+          TopLeft="338,175" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Data Flow Task\Script Component"
+          TopLeft="354,89" />
         <EdgeLayout
-          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
-          TopLeft="423,217">
+          Id="Package\Data Flow Task.Paths[Output 0]"
+          TopLeft="437.5,131">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="11,57"
+              EndConnector="-19,44"
               Start="0,0"
-              End="11,49.5">
+              End="-19,36.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.5" />
+                    End="0,18" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,24.5"
-                    Point2="0,28.5"
-                    Point3="4,28.5" />
+                    Point1="0,18"
+                    Point2="0,22"
+                    Point3="-4,22" />
                   <mssgle:LineSegment
-                    End="7,28.5" />
+                    End="-15,22" />
                   <mssgle:CubicBezierSegment
-                    Point1="7,28.5"
-                    Point2="11,28.5"
-                    Point3="11,32.5" />
+                    Point1="-15,22"
+                    Point2="-19,22"
+                    Point3="-19,26" />
                   <mssgle:LineSegment
-                    End="11,49.5" />
+                    End="-19,36.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5465,30 +5434,52 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Flow Task.Paths[Derived Column Output]"
-          TopLeft="434,316">
+          TopLeft="435.75,316">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-20.5,69"
+              EndConnector="0,67.5"
               Start="0,0"
-              End="-20.5,61.5">
+              End="0,60">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,30.5"
-                    Point2="0,34.5"
-                    Point3="-4,34.5" />
+                    End="0,60" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Data Conversion Output]"
+          TopLeft="418.5,217">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.5,57"
+              Start="0,0"
+              End="15.5,49.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-16.5,34.5" />
+                    End="0,24.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-16.5,34.5"
-                    Point2="-20.5,34.5"
-                    Point3="-20.5,38.5" />
+                    Point1="0,24.5"
+                    Point2="0,28.5"
+                    Point3="4,28.5" />
                   <mssgle:LineSegment
-                    End="-20.5,61.5" />
+                    End="11.5,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.5,28.5"
+                    Point2="15.5,28.5"
+                    Point3="15.5,32.5" />
+                  <mssgle:LineSegment
+                    End="15.5,49.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5500,11 +5491,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\import exchange_rates">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="319,42"
           Id="Package\import exchange_rates\OLE DB Destination - warehouse exchange rates"
@@ -5536,9 +5540,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -5560,9 +5562,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5676,19 +5676,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\import suppliers\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Flow Task\Excel Destination 1">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

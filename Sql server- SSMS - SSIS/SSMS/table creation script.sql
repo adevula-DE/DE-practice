@@ -78,7 +78,7 @@ drop table financial_analysis
 ------------------------------------------------------------------
 --create data warehouse DB
 CREATE DATABASE financial_data_warehouse;
-use financial_data_warehouse;
+
 
 --create financial_data_warehouse.exchange_rates
 CREATE TABLE dbo.exchange_rates (
@@ -118,6 +118,7 @@ CREATE TABLE suppliers (
     phone VARCHAR(14)
 	);
 
+use financial_data_warehouse;
 select * from financial_transactions;
 select * from exchange_rates
 select * from suppliers
